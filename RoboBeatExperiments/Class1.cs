@@ -109,7 +109,7 @@ namespace RoboBeatExperiments
     }
 
     /*
-    // instakill
+    // instakill enemies
     [HarmonyPatch(typeof(Spell), nameof(Spell.CreateDamageInfo))]
     public static class Spell_CreateDamageInfo_Patch
     {
@@ -119,4 +119,16 @@ namespace RoboBeatExperiments
         }
     }
     */
+
+    // instakill player
+    [HarmonyPatch(typeof(Player), nameof(Player.Damage))]
+    public static class Player_Damage_Patch
+    {
+        static bool Prefix(ref DamageInfo info)
+        {
+            info.Damage = 100f;
+            MelonLogger.Msg("modified dmg");
+            return true;
+        }
+    }
 }
