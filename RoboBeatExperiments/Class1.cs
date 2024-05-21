@@ -8,14 +8,14 @@ using RoboBeatExperiments;
 using UnityEngine;
 using Harmony;
 
-[assembly: MelonInfo(typeof(MiniRobo), "MiniRobo", "1.0", "shady")]
+[assembly: MelonInfo(typeof(RoboBeater), "RoboBeatExperiments", "1.0", "shady")]
 [assembly: MelonGame("Inzanity", "ROBOBEAT")]
 
 namespace RoboBeatExperiments
 {
-    public class MiniRobo : MelonMod
+    public class RoboBeater : MelonMod
     {
-        public static MiniRobo instance;
+        public static RoboBeater instance;
 
         private static KeyCode noClipToggleKey;
 
