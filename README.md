@@ -1,4 +1,8 @@
-# RoboBeatExperiments
-A base MelonLoader mod for ROBOBEAT that I am using to experiment.
+# DeathMaxxing
+A mod for ROBOBEAT that makes you instantly die when you take any form of damage.
 
-**This branch is _NOT_ as completed mod!** If you wish to get the source code for functional, completed mods such as MiniRobo and DeathMaxxing, you can find them on their associated branches.
+## How to use DeathMaxxing:
+1. Patch your game with [MelonLoader](https://melonwiki.xyz/)
+2. Download the latest release of MiniRobo from [here](https://github.com/u4pak/RoboBeatExperiments/releases/tag/v1.0.0-deathmaxxing).
+3. Drag and drop `DeathMaxxing.dll` into the `Mods` folder inside your ROBOBEAT install directory
+4. Launch your game!
