@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\Documents\ROBOBEAT MODDED\ROBOBEAT_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using MelonLoader;
 using RoboBeatExperiments;
 using UnityEngine;
-using Harmony;
+using System.Reflection;
+using HarmonyLib;
 
 [assembly: MelonInfo(typeof(RoboBeater), "RoboBeatExperiments", "1.0", "shady")]
 [assembly: MelonGame("Inzanity", "ROBOBEAT")]
@@ -27,6 +28,7 @@ namespace RoboBeatExperiments
             noClipToggleKey = KeyCode.N;
         }
 
+        /*
         public override void OnLateUpdate()
         {
             if (Input.GetKeyDown(noClipToggleKey))
@@ -34,7 +36,9 @@ namespace RoboBeatExperiments
                 ToggleNoClip();
             }
         }
+        */
 
+        /*
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             if (sceneName == "AlwaysGameplay" || sceneName == "DontDestroyOnLoad" || sceneName == "HideAndDontSave")
@@ -49,6 +53,7 @@ namespace RoboBeatExperiments
             }
             else { LoggerInstance.Msg($"Entered valid gameplay scene, shrinking player size. ({sceneName})"); SetSize(0.25f); }
         }
+        */
 
         private static void SetSize(float size)
         {
@@ -80,7 +85,14 @@ namespace RoboBeatExperiments
 
             isNoClipping = !isNoClipping;
         }
+    }
 
-        
+    [HarmonyPatch(typeof(Spell), nameof(Spell.CreateDamageInfo))]
+    public static class Spell_CreateDamageInfo_Patch
+    {
+        static void Postfix(ref DamageInfo __result)
+        {
+            __result.Damage = 99999f;
+        }
     }
 }
