@@ -22,6 +22,7 @@ namespace RoboBeatExperiments
 
         private static bool isNoClipping = false;
 
+        // setup
         public override void OnEarlyInitializeMelon()
         {
             instance = this;
@@ -29,6 +30,7 @@ namespace RoboBeatExperiments
         }
 
         /*
+        // keybind press check
         public override void OnLateUpdate()
         {
             if (Input.GetKeyDown(noClipToggleKey))
@@ -38,7 +40,7 @@ namespace RoboBeatExperiments
         }
         */
 
-        /*
+        // gameplay scene checks
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             if (sceneName == "AlwaysGameplay" || sceneName == "DontDestroyOnLoad" || sceneName == "HideAndDontSave")
@@ -48,13 +50,15 @@ namespace RoboBeatExperiments
             }
             if (sceneName == "Main_Menu" || sceneName == "ROBOBEAT_INTRODUCTION" || sceneName == "ROBOBEAT_ENDLESS")
             {
-                LoggerInstance.Msg($"Blacklisted scene loaded, normalizing size. ({sceneName})");
-                SetSize(1f);
+                // LoggerInstance.Msg($"Blacklisted scene loaded, normalizing size. ({sceneName})");
+                // SetSize(1f);
+                LoggerInstance.Msg($"Blacklisted scene loaded, doing nothing. ({sceneName})");
             }
-            else { LoggerInstance.Msg($"Entered valid gameplay scene, shrinking player size. ({sceneName})"); SetSize(0.25f); }
+            // else { LoggerInstance.Msg($"Entered valid gameplay scene, shrinking player size. ({sceneName})"); SetSize(0.25f); }
+            else { LoggerInstance.Msg($"Entered valid gameplay scene, setting player health to one. ({sceneName})"); SetHealth(1f); }
         }
-        */
 
+        // shrinker
         private static void SetSize(float size)
         {
 
@@ -69,6 +73,7 @@ namespace RoboBeatExperiments
             }
         }
 
+        // noclip
         private static void ToggleNoClip()
         {
             GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>(true);
@@ -85,8 +90,26 @@ namespace RoboBeatExperiments
 
             isNoClipping = !isNoClipping;
         }
+
+        // TODO: fix this cause it just doesn't work lol
+        private static void SetHealth(float health)
+        {
+            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>(true);
+
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name == "Player")
+                {
+                    Player player = obj.GetComponent<Player>();
+
+                    player.CurrentHealth = 1f;
+                }
+            }
+        }
     }
 
+    /*
+    // instakill
     [HarmonyPatch(typeof(Spell), nameof(Spell.CreateDamageInfo))]
     public static class Spell_CreateDamageInfo_Patch
     {
@@ -95,4 +118,5 @@ namespace RoboBeatExperiments
             __result.Damage = 99999f;
         }
     }
+    */
 }
