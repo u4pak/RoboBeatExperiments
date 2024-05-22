@@ -18,29 +18,41 @@ namespace RoboBeatExperiments
     {
         public static RoboBeater instance;
 
-        private static KeyCode noClipToggleKey;
+        // private static KeyCode noClipToggleKey;
+        // private static KeyCode cheatMenuToggleKey;
 
-        private static bool isNoClipping = false;
+        // private static bool isNoClipping = false;
+        // private static bool isCheatMenuShowing = false;
 
         // setup
         public override void OnEarlyInitializeMelon()
         {
             instance = this;
-            noClipToggleKey = KeyCode.N;
+            GameManager.CheatEngineEnabled = true;
+            // noClipToggleKey = KeyCode.N;
+            // cheatMenuToggleKey = KeyCode.Backslash;
         }
 
-        /*
+        
         // keybind press check
         public override void OnLateUpdate()
         {
+            /*
             if (Input.GetKeyDown(noClipToggleKey))
             {
                 ToggleNoClip();
             }
+            
+            if (Input.GetKeyDown(cheatMenuToggleKey))
+            {
+                ToggleCheatMenu();
+            }
+            */
         }
-        */
+
 
         // gameplay scene checks
+        /*
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             if (sceneName == "AlwaysGameplay" || sceneName == "DontDestroyOnLoad" || sceneName == "HideAndDontSave")
@@ -57,6 +69,7 @@ namespace RoboBeatExperiments
             // else { LoggerInstance.Msg($"Entered valid gameplay scene, shrinking player size. ({sceneName})"); SetSize(0.25f); }
             else { LoggerInstance.Msg($"Entered valid gameplay scene, setting player health to one. ({sceneName})"); SetHealth(1f); }
         }
+        
 
         // shrinker
         private static void SetSize(float size)
@@ -90,7 +103,34 @@ namespace RoboBeatExperiments
 
             isNoClipping = !isNoClipping;
         }
+        */
 
+        // cheat menu
+        /*
+        private static void ToggleCheatMenu()
+        {
+            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>(true);
+            
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name == "Cheat Menu")
+                {
+                    if (!isCheatMenuShowing)
+                    {
+                        UserInterfaceReferences.Instant.UI_ModeSwapper.SwapToMode(UI_Mode.CheatMenu, false, false);
+                    }
+                    else
+                    {
+                        UserInterfaceReferences.Instant.UI_ModeSwapper.SwapToMode(UI_Mode.InGame, false, false);
+                    }
+
+                    isCheatMenuShowing = !isCheatMenuShowing;
+                }
+            }
+        }
+        */
+
+        /*
         // TODO: fix this cause it just doesn't work lol
         private static void SetHealth(float health)
         {
@@ -106,6 +146,7 @@ namespace RoboBeatExperiments
                 }
             }
         }
+        */
     }
 
     /*
@@ -118,7 +159,7 @@ namespace RoboBeatExperiments
             __result.Damage = 99999f;
         }
     }
-    */
+    
 
     // instakill player
     [HarmonyPatch(typeof(Player), nameof(Player.Damage))]
@@ -131,4 +172,5 @@ namespace RoboBeatExperiments
             return true;
         }
     }
+    */
 }
